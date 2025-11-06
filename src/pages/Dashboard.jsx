@@ -38,7 +38,7 @@ const Dashboard = () => {
               <IndianRupee className="scale-75" />
             </div>
             <div className="boxBottom text-left">
-                <h1 className="text-4xl font-bold flex flex-row items-center"><FaRupeeSign className="scale-50 font-bold w-[20px]" />{totalMonthlyPayroll}</h1>
+                <h1 className="text-4xl font-bold flex flex-row items-center"><FaRupeeSign className="scale-50 font-bold w-5" />{totalMonthlyPayroll}</h1>
                 <h2 className="text-[12px] text-gray-500 mt-1 ml-[22px]">Per month</h2>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Dashboard = () => {
               <ChartNoAxesCombined className="scale-75" />
             </div>
             <div className="boxBottom text-left">
-                <h1 className="text-4xl font-bold flex flex-row items-center"><FaRupeeSign className="scale-50 font-bold w-[20px]" />{avgSalary}</h1>
+                <h1 className="text-4xl font-bold flex flex-row items-center"><FaRupeeSign className="scale-50 font-bold w-5" />{avgSalary}</h1>
                 <h2 className="text-[12px] text-gray-500 mt-1 ml-[22px]">Per employee</h2>
             </div>
           </div>
