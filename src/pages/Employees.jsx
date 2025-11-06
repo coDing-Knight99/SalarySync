@@ -1,10 +1,12 @@
-import React from 'react'
+import {React,useState} from 'react'
 import Navbar from '../components/Navbar'
 import { PlusIcon } from 'lucide-react'
 import { UserIcon } from 'lucide-react'
 import SearchFilter from '../components/SearchFilter'
 import EmployeeDetails from '../components/EmployeeDetails'
+import AddEmployee from '../components/AddEmployee'
 const Employees = () => {
+  const [addEmployee, setaddEmployee] = useState(false)
     const employees = [
   {
     name: "Aarav Mehta",
@@ -90,6 +92,9 @@ const Employees = () => {
 
   return (
     <div>
+      {
+        addEmployee?<AddEmployee setaddEmployee={setaddEmployee}/>:''
+      }
       <Navbar/>
       <div className='w-full flex flex-col items-center justify-center'>
         <div className='flex w-[95%] h-[30%] m-5'>
@@ -98,7 +103,9 @@ const Employees = () => {
                 <p className='text-2xl font-sans text-gray-600 my-6'>Manage your organization's employees</p>
             </div>
             <div className='flex justify-center items-center'>
-                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900'><UserIcon/><PlusIcon/> Add Employee</div>
+                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900' onClick={()=>{
+                  setaddEmployee(true)
+                }}><UserIcon/><PlusIcon/> Add Employee</div>
             </div>
         </div>
         <div className='w-[95%]'>

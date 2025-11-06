@@ -5,12 +5,14 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Employees from './pages/Employees'
 import Attendance from './pages/Attendance'
+import { ToastContainer } from 'react-toastify'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-     {/* <Employees/> */}
+    <ToastContainer className="font-bold"/>
+     <Employees/>
      <Attendance/>
     </>
   )

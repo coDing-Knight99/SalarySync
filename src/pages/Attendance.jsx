@@ -5,8 +5,10 @@ import AttendanceDetails from '../components/AttendanceDetails'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import { Calendar1Icon } from 'lucide-react'
+import AddAttendance from '../components/AddAttendance'
 const Attendance = () => {
 
+    const [addAttendance, setaddAttendance] = useState(false)
     const [selectedDate, setselectedDate] = useState(new Date())
     useEffect(() => {
     }, [selectedDate])
@@ -118,6 +120,9 @@ const Attendance = () => {
   return (
     <div>
       <Navbar/>
+      {
+        addAttendance?<AddAttendance setaddAttendance={setaddAttendance}/>:''
+      }
       <div className='w-full flex flex-col items-center justify-center'>
         <div className='flex w-[95%] h-[30%] m-5'>
             <div className='w-[85%]'>
@@ -125,7 +130,7 @@ const Attendance = () => {
                 <p className='text-2xl font-sans text-gray-600 my-6'>Monitor and manage employee attendance</p>
             </div>
             <div className='flex justify-center items-center'>
-                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900'><PlusIcon/> Mark Attendance</div>
+                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900' onClick={()=>{setaddAttendance(true)}}><PlusIcon/> Mark Attendance</div>
             </div>
         </div>
         <div className='w-[95%] flex gap-4 items-center'>
@@ -136,7 +141,7 @@ const Attendance = () => {
                 }}
                 dateFormat="MM/yyyy"
                 showMonthYearPicker
-                 className="border rounded-lg p-2 text-center shadow-sm"        
+                 className="border rounded-lg p-2 text-center shadow-sm cursor-pointer"        
                 />       
         </div>
         <div className='w-[95%] border border-gray-300 rounded-xl my-5 '>
