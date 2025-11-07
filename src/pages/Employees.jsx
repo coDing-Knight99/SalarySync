@@ -103,7 +103,7 @@ const Employees = () => {
                 <p className='text-2xl font-sans text-gray-600 my-6'>Manage your organization's employees</p>
             </div>
             <div className='flex justify-center items-center'>
-                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900 hover:shadow-2xl' onClick={()=>{
+                <div className='flex m-2 text-lg text-white bg-black px-10 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900 hover:shadow-2xl' onClick={()=>{
                   setaddEmployee(true)
                 }}><UserIcon/><PlusIcon/> Add Employee</div>
             </div>
