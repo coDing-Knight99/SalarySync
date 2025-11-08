@@ -1,8 +1,8 @@
-import { React, useState } from 'react'
-import Select from 'react-select'
-import { toast } from 'react-toastify'
-import { CalendarIcon, IndianRupeeIcon, PlusIcon } from 'lucide-react'
-import DatePicker from 'react-datepicker'
+    import { React, useState } from 'react'
+    import Select from 'react-select'
+    import { toast } from 'react-toastify'
+    import { CalendarIcon, IndianRupeeIcon, PlusIcon } from 'lucide-react'
+    import DatePicker from 'react-datepicker'
 const AddEmployee = ({ setaddEmployee }) => {
     const [selectdept, setselectdept] = useState(null)
     const [selectpos, setselectpos] = useState(null)

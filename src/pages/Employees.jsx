@@ -5,10 +5,16 @@ import { UserIcon } from 'lucide-react'
 import SearchFilter from '../components/SearchFilter'
 import EmployeeDetails from '../components/EmployeeDetails'
 import AddEmployee from '../components/AddEmployee'
+import EditEmployee from '../components/EditEmployee'
+import ConfirmDelete from '../components/ConfirmDelete'
+
 const Employees = () => {
-  const [addEmployee, setaddEmployee] = useState(false)
-    const employees = [
+  const [addEmployee, setaddEmployee] = useState(false);
+  const [editEmployee, seteditEmployee] = useState(null);
+  const [deleteEmp, setdeleteEmp] = useState(null);
+const employees = [
   {
+    id: 1,
     name: "Aarav Mehta",
     email: "aarav.mehta@example.com",
     department: "Engineering",
@@ -17,6 +23,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 2,
     name: "Priya Sharma",
     email: "priya.sharma@example.com",
     department: "Human Resources",
@@ -25,6 +32,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 3,
     name: "Rohit Verma",
     email: "rohit.verma@example.com",
     department: "Finance",
@@ -33,6 +41,7 @@ const Employees = () => {
     status: "Inactive"
   },
   {
+    id: 4,
     name: "Sneha Iyer",
     email: "sneha.iyer@example.com",
     department: "Marketing",
@@ -41,6 +50,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 5,
     name: "Vikram Singh",
     email: "vikram.singh@example.com",
     department: "IT Support",
@@ -49,6 +59,7 @@ const Employees = () => {
     status: "Inactive"
   },
   {
+    id: 6,
     name: "Aarav Mehta",
     email: "aarav.mehta@example.com",
     department: "Engineering",
@@ -57,6 +68,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 7,
     name: "Priya Sharma",
     email: "priya.sharma@example.com",
     department: "Human Resources",
@@ -65,6 +77,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 8,
     name: "Rohit Verma",
     email: "rohit.verma@example.com",
     department: "Finance",
@@ -73,6 +86,7 @@ const Employees = () => {
     status: "Inactive"
   },
   {
+    id: 9,
     name: "Sneha Iyer",
     email: "sneha.iyer@example.com",
     department: "Marketing",
@@ -81,6 +95,7 @@ const Employees = () => {
     status: "Active"
   },
   {
+    id: 10,
     name: "Vikram Singh",
     email: "vikram.singh@example.com",
     department: "IT Support",
@@ -95,6 +110,10 @@ const Employees = () => {
       {
         addEmployee?<AddEmployee setaddEmployee={setaddEmployee}/>:''
       }
+      {
+        deleteEmp?<ConfirmDelete setdeleteEmp={setdeleteEmp}/>:''
+      }
+      {editEmployee?<EditEmployee e={editEmployee} seteditEmployee={seteditEmployee}/>:""}
       <Navbar/>
       <div className='w-full flex flex-col items-center justify-center'>
         <div className='flex w-[95%] h-[30%] m-5'>
@@ -105,6 +124,7 @@ const Employees = () => {
             <div className='flex justify-center items-center'>
                 <div className='flex m-2 text-lg text-white bg-black px-10 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900 hover:shadow-2xl' onClick={()=>{
                   setaddEmployee(true)
+                  document.body.classList.add("overflow-hidden")
                 }}><UserIcon/><PlusIcon/> Add Employee</div>
             </div>
         </div>
@@ -123,7 +143,7 @@ const Employees = () => {
         </div>
         {
             employees.map((e)=>{
-                return <EmployeeDetails e={e} key={e.id}/>
+                return <EmployeeDetails setdeleteEmp={setdeleteEmp} seteditEmployee={seteditEmployee} e={e} key={e.id}/>
             })
         }
         </div>

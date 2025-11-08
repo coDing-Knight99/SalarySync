@@ -130,7 +130,9 @@ const Attendance = () => {
                 <p className='text-2xl font-sans text-gray-600 my-6'>Monitor and manage employee attendance</p>
             </div>
             <div className='flex justify-center items-center'>
-                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900 hover:shadow-2xl' onClick={()=>{setaddAttendance(true)}}><PlusIcon/> Mark Attendance</div>
+                <div className='flex m-2 text-lg text-white bg-black px-5 py-3 font-bold rounded-2xl cursor-pointer hover:bg-gray-900 hover:shadow-2xl' onClick={()=>{setaddAttendance(true)
+                document.body.classList.add("overflow-hidden")
+                }}><PlusIcon/> Mark Attendance</div>
             </div>
         </div>
         <div className='w-[95%] flex gap-4 items-center'>
