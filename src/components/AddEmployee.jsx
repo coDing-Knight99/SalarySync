@@ -3,13 +3,47 @@
     import { toast } from 'react-toastify'
     import { CalendarIcon, IndianRupeeIcon, PlusIcon } from 'lucide-react'
     import DatePicker from 'react-datepicker'
+    import axios from 'axios'
 const AddEmployee = ({ setaddEmployee }) => {
+
     const [selectdept, setselectdept] = useState(null)
     const [selectpos, setselectpos] = useState(null)
     const [date, setdate] = useState(new Date())
-    const options = [{ value: "engineering", label: "Engineering" }]
-    const optionsStatus = [{value:"active",label:"Active"},{value:"inactive",label:"Inactive"}] 
+    const optionsDept = [{ value: "IT", label: "IT" },{ value: "HR", label: "HR" },{ value: "Marketing", label: "Marketing" },{ value: "Finance", label: "Finance" }]
+    const optionsPos = [{ value: "Software Engineer", label: "Software Engineer" },{ value: "HR Executive", label: "HR Executive" },{ value: "Marketing Coordinator", label: "Marketing Coordinator" },{ value: "Accountant", label: "Accountant" }]
+    const optionsStatus = [{value:"Active",label:"Active"},{value:"Inactive",label:"Inactive"}] 
     const [Status, setStatus] = useState(null)
+    const addEmp = async()=>{
+        const name=document.getElementById('name').value;
+        const email=document.getElementById('email').value;
+        const department=selectdept ? selectdept.value : '';
+        const position=selectpos ? selectpos.value : '';
+        const salary=document.getElementById('salary').value;   
+        const overtimerate=document.getElementById('overtimerate').value;
+        const joiningdate=document.getElementById('joiningdate').value;
+        const status=Status ? Status.value : '';
+
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('department', department);
+        formData.append('position', position);
+        formData.append('salary', salary);
+        formData.append('overtimerate', overtimerate);
+        formData.append('joiningdate', joiningdate);
+        formData.append('status', status);
+
+        await axios.post('http://localhost/SalarySyncServer/addemployee.php',formData,{
+    headers: { 'Content-Type': 'multipart/form-data' }
+}).then(()=>{
+                toast.success('Employee Added Successfully')
+                setaddEmployee(false)
+                document.body.classList.remove("overflow-hidden")
+            
+    }).catch((error)=>{
+        toast.error('Error Adding Employee')
+    });
+    }
     return (
         <div onClick={() => {
             setaddEmployee(false)
@@ -20,13 +54,13 @@ const AddEmployee = ({ setaddEmployee }) => {
                 <div className='flex flex-col gap-5'>
                     <div className='px-5'>
                         <label className='text-xl font-medium'>Full Name</label>
-                        <input className="w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300 rounded-xl 
+                        <input id='name' className="w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300 rounded-xl 
                    focus:outline-none focus:ring-2 focus:ring-blue-500 
                    focus:border-blue-500 transition-all" placeholder='Enter Employee Name...' type="text" />
                     </div>
                     <div className='px-5'>
                         <label className='text-xl font-medium'>Email</label>
-                        <input className="w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300 rounded-xl 
+                        <input id='email' className="w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300 rounded-xl 
                    focus:outline-none focus:ring-2 focus:ring-blue-500 
                    focus:border-blue-500 transition-all" placeholder='Enter Employee email...' type="text" />
                     </div>
@@ -34,7 +68,8 @@ const AddEmployee = ({ setaddEmployee }) => {
                         <div className='w-[50%] px-5 flex flex-col'>
                             <label className='text-xl font-medium'>Department</label>
                             <Select
-                                options={options}
+                            id='department'
+                                options={optionsDept}
                                 value={selectdept}
                                 onChange={setselectdept}
                                 placeholder='Select Department...'
@@ -43,7 +78,8 @@ const AddEmployee = ({ setaddEmployee }) => {
                         <div className='w-[50%] px-5'>
                             <label className='text-xl font-medium'>Position</label>
                             <Select
-                                options={selectdept ? options : ''}
+                            id='position'
+                                options={selectdept ? optionsPos : ''}
                                 value={selectpos}
                                 onFocus={() => {
                                     if (!selectdept) {
@@ -58,13 +94,13 @@ const AddEmployee = ({ setaddEmployee }) => {
                     <div className='flex justify-center items-center gap-1'>
                         <div className='w-[50%] px-5 flex flex-col'>
                             <label className='text-xl font-medium flex items-center gap-1'><div><IndianRupeeIcon className='w-5' /></div> Monthly Salary</label>
-                            <input type='number' placeholder='Enter Monthly Salary...' className='w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300  
+                            <input id='salary' type='number' placeholder='Enter Monthly Salary...' className='w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300  
                    focus:outline-none focus:ring-2 focus:ring-blue-500 
                    focus:border-blue-500 transition-all'/>
                         </div>
                         <div className='w-[50%] px-5'>
                             <label className='text-xl font-medium flex items-center gap-1'>Overtime Rate <div className='flex items-center'><IndianRupeeIcon className='w-5' />/hr</div></label>
-                            <input type="number" className='w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300  
+                            <input id='overtimerate' type="number" className='w-full my-2 pl-3 pr-4 py-2 bg-white border border-gray-300  
                    focus:outline-none focus:ring-2 focus:ring-blue-500 
                    focus:border-blue-500 transition-all' placeholder='Enter Overtime Rate (Rupees/hour)...'/>
                         </div>
@@ -75,9 +111,10 @@ const AddEmployee = ({ setaddEmployee }) => {
                             <div className='w-full flex gap-2 items-center'>
                                 <CalendarIcon/>
                                 <DatePicker
+                                    id='joiningdate'
                                     selected={date}
                                     onChange={setdate}
-                                    dateFormat={"dd/MM/yyyy"}
+                                    dateFormat={"yyyy-MM-dd"}
                                     className='w-full border rounded-lg p-2 text-center shadow-sm cursor-pointer' 
                                     placeholderText='Select Joining Date...'
                                     />
@@ -97,7 +134,9 @@ const AddEmployee = ({ setaddEmployee }) => {
                     </div>
                     <div className='w-full flex items-center justify-end gap-3'>
                         <div onClick={()=>{setaddEmployee(false)}} className=' border py-3 px-2 rounded-2xl cursor-pointer hover:shadow-2xl'>Cancel</div>
-                        <div className='flex m-5 text-white bg-black font-bold rounded-2xl py-3 px-5 hover:shadow-2xl cursor-pointer hover:bg-gray-900'><PlusIcon/> Add</div>
+                        <div onClick={()=>{
+                            addEmp();
+                        }} className='flex m-5 text-white bg-black font-bold rounded-2xl py-3 px-5 hover:shadow-2xl cursor-pointer hover:bg-gray-900'><PlusIcon/> Add</div>
                     </div>
                 </div>
             </div>
